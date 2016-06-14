@@ -1,0 +1,74 @@
+{
+  "name": "vscode-stylefmt",
+  "displayName": "stylefmt",
+  "description": "stylefmt is a tool that automatically formats stylesheets",
+  "version": "0.1.0",
+  "publisher": "mrmlnc",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.0.0"
+  },
+  "icon": "icon.svg",
+  "homepage": "https://github.com/mrmlnc/vscode-stylefmt/blob/master/README.md",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mrmlnc/vscode-stylefmt"
+  },
+  "keywords": [
+    "css",
+    "format",
+    "style",
+    "stylefmt"
+  ],
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:stylefmt.execute"
+  ],
+  "main": "./extension.js",
+  "contributes": {
+    "commands": [{
+      "command": "stylefmt.execute",
+      "title": "stylefmt: Format CSS"
+    }],
+    "configuration": {
+      "type": "object",
+      "title": "stylefmt configuration",
+      "properties": {
+        "stylefmt.autoFormatOnSave": {
+          "type": "boolean",
+          "default": false,
+          "description": "Auto format on save"
+        }
+      }
+    }
+  },
+  "devDependencies": {
+    "vscode": "^0.11.13",
+    "xo": "^0.15.1"
+  },
+  "dependencies": {
+    "postcss": "=5.0.21",
+    "postcss-scss": "=0.1.8",
+    "stylefmt": "=3.4.4"
+  },
+  "scripts": {
+    "test": "xo"
+  },
+  "xo": {
+    "rules": {
+      "indent": [2, 2, { "SwitchCase": 1 }],
+      "no-var": 2,
+      "prefer-const": [2, { "destructuring": "all" }],
+      "arrow-parens": [2, "always"],
+      "object-curly-spacing": [2, "always"],
+      "babel/object-curly-spacing": 0,
+      "space-before-function-paren": [2, "never"],
+      "generator-star-spacing": [2, "after"]
+    },
+    "envs": [
+      "node"
+    ]
+  }
+}
