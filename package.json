@@ -1,7 +1,7 @@
 {
   "name": "vscode-stylefmt",
   "displayName": "stylefmt",
-  "description": "stylefmt is a tool that automatically formats stylesheets",
+  "description": "Modern CSS Formatter",
   "version": "0.1.0",
   "publisher": "mrmlnc",
   "license": "MIT",
