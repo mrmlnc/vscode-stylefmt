@@ -2,7 +2,7 @@
 
 > [stylefmt](https://github.com/morishitter/stylefmt) is a tool that automatically formats your stylesheets.
 
-![2016-06-14_20-03-46](https://cloud.githubusercontent.com/assets/7034281/16052074/2a94fc32-326b-11e6-9a34-b689fcca5d41.gif)
+![VS Code Plugin for stylefmt](https://cloud.githubusercontent.com/assets/7034281/16056620/f7442b8c-327e-11e6-9400-b59085d4abef.gif)
 
 ## Install
 
