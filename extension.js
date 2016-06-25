@@ -2,15 +2,17 @@
 
 const vscode = require('vscode');
 const postcss = require('postcss');
+const stylefmt = require('stylefmt');
+const scssSyntax = require('postcss-scss');
 
 function init(document, onDidSaveStatus) {
   const text = document.getText();
   const lang = document.languageId;
   const cwd = vscode.workspace.rootPath ? vscode.workspace.rootPath : '';
 
-  postcss([require('stylefmt')(cwd)])
+  postcss([stylefmt({ cwd })])
     .process(text, lang === 'sass' && {
-      syntax: require('postcss-scss')
+      syntax: scssSyntax
     })
     .then((result) => {
       const editor = vscode.editor || vscode.window.activeTextEditor;
