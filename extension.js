@@ -11,7 +11,7 @@ function init(document, onDidSaveStatus) {
   const cwd = vscode.workspace.rootPath ? vscode.workspace.rootPath : '';
 
   postcss([stylefmt({ cwd })])
-    .process(text, lang === 'sass' && {
+    .process(text, lang === 'scss' && {
       syntax: scssSyntax
     })
     .then((result) => {
