@@ -50,9 +50,9 @@
     "xo": "^0.16.0"
   },
   "dependencies": {
-    "postcss": "=5.0.21",
-    "postcss-scss": "=0.1.8",
-    "stylefmt": "=4.1.1"
+    "postcss": "5.1.0",
+    "postcss-scss": "0.1.9",
+    "stylefmt": "4.2.0"
   },
   "scripts": {
     "test": "xo"
