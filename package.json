@@ -25,7 +25,9 @@
     "Other"
   ],
   "activationEvents": [
-    "onCommand:stylefmt.execute"
+    "onCommand:stylefmt.execute",
+    "onLanguage:css",
+    "onLanguage:scss"
   ],
   "main": "./extension.js",
   "contributes": {
