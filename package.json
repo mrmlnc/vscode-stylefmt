@@ -54,7 +54,7 @@
   "dependencies": {
     "postcss": "5.1.1",
     "postcss-scss": "0.1.9",
-    "stylefmt": "4.2.1"
+    "stylefmt": "4.2.3"
   },
   "scripts": {
     "test": "xo"
