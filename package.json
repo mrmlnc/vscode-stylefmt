@@ -42,7 +42,7 @@
         "stylefmt.autoFormatOnSave": {
           "type": "boolean",
           "default": false,
-          "description": "Auto format on save"
+          "description": "Auto format on save."
         }
       }
     }
