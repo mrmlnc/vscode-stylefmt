@@ -14,10 +14,10 @@ Press `F1` and run the command named `stylefmt: Format CSS`.
 
 ## Supported settings
 
-#### autoFormatOnSave
+**autoFormatOnSave**
 
-Type: `boolean`<br>
-Default: `false`
+  * Type: `boolean`
+  * Default: `false`
 
 Auto format on save.
 
