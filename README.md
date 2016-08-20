@@ -43,6 +43,28 @@ For changes keyboard shortcuts, create a new rule in `File -> Preferences -> Key
 
 Read about the [stylelint rules](https://github.com/morishitter/stylefmt#stylelint-rules-that-stylefmt-can-handle) and [default rules](https://github.com/morishitter/stylefmt#default-formatting-rules-without-stylelint-config-file) in stylefmt repository.
 
+## Stylefmt modifications (need to check before release)
+
+**lib/params.js**
+
+```diff
+function params (options) {
++ if (options.skip) {
++   return Promise.resolve(options);
++ }
+  // same as the options in stylelint
+  var cosmiconfigOpts = {
+    argv: false,
+    rcExtensions: true
+  }
+
+  var moduleName
+- var cwd = process.cwd()
++ var cwd = options.cwd || process.cwd()
+  // ...
+}
+```
+
 ## Changelog
 
 See the [Releases section of our GitHub project](https://github.com/mrmlnc/vscode-stylefmt/releases) for changelogs for each release version.
