@@ -3,46 +3,62 @@
 const vscode = require('vscode');
 const postcss = require('postcss');
 const stylefmt = require('stylefmt');
+const stylefmtConfig = require('stylefmt/lib/params');
 const scssSyntax = require('postcss-scss');
 
 function init(document, onDidSaveStatus) {
   const text = document.getText();
   const lang = document.languageId;
-  const cwd = vscode.workspace.rootPath ? vscode.workspace.rootPath : '';
+  const cwd = vscode.workspace.rootPath ? vscode.workspace.rootPath : null;
 
-  postcss([stylefmt({ cwd })])
-    .process(text, lang === 'scss' && {
-      syntax: scssSyntax
-    })
-    .then((result) => {
-      const editor = vscode.editor || vscode.window.activeTextEditor;
-      if (!editor) {
-        throw new Error('Ooops...');
+  let overrides = null;
+  const useOverrides = vscode.workspace.getConfiguration('stylefmt').useStylelintConfigOverrides;
+  if (useOverrides) {
+    overrides = vscode.workspace.getConfiguration('stylelint').configOverrides;
+  }
+
+  stylefmtConfig({ cwd })
+    .then((options) => {
+      options.skip = true;
+
+      if (overrides) {
+        options.stylelint = Object.assign(options.stylelint, overrides);
       }
 
-      const document = editor.document;
-      const lastLine = document.lineAt(document.lineCount - 1);
-      const start = new vscode.Position(0, 0);
-      const end = new vscode.Position(document.lineCount - 1, lastLine.text.length);
-      const range = new vscode.Range(start, end);
+      postcss([stylefmt(options)])
+        .process(text, lang === 'scss' && {
+          syntax: scssSyntax
+        })
+        .then((result) => {
+          const editor = vscode.editor || vscode.window.activeTextEditor;
+          if (!editor) {
+            throw new Error('Ooops...');
+          }
 
-      if (document.stylefmt) {
-        delete document.stylefmt;
-        return;
-      }
+          const document = editor.document;
+          const lastLine = document.lineAt(document.lineCount - 1);
+          const start = new vscode.Position(0, 0);
+          const end = new vscode.Position(document.lineCount - 1, lastLine.text.length);
+          const range = new vscode.Range(start, end);
 
-      if (onDidSaveStatus) {
-        const we = new vscode.WorkspaceEdit();
-        we.replace(document.uri, range, result.css);
-        document.stylefmt = true;
-        vscode.workspace.applyEdit(we).then(() => {
-          document.save();
+          if (document.stylefmt) {
+            delete document.stylefmt;
+            return;
+          }
+
+          if (onDidSaveStatus) {
+            const we = new vscode.WorkspaceEdit();
+            we.replace(document.uri, range, result.css);
+            document.stylefmt = true;
+            vscode.workspace.applyEdit(we).then(() => {
+              document.save();
+            });
+          } else {
+            editor.edit((builder) => {
+              builder.replace(range, result.css);
+            });
+          }
         });
-      } else {
-        editor.edit((builder) => {
-          builder.replace(range, result.css);
-        });
-      }
     })
     .catch((err) => {
       vscode.window.showWarningMessage(err);

@@ -21,6 +21,13 @@ Press `F1` and run the command named `stylefmt: Format CSS`.
 
 Auto format on save.
 
+**useStylelintConfigOverrides**
+
+  * Type: `boolean`
+  * Default: `false`
+
+Overrides rules using Stylelint plugin settings.
+
 ## Keyboard shortcuts
 
 For changes keyboard shortcuts, create a new rule in `File -> Preferences -> Keyboard Shortcuts`:

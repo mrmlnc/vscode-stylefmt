@@ -43,6 +43,11 @@
           "type": "boolean",
           "default": false,
           "description": "Auto format on save."
+        },
+        "stylefmt.useStylelintConfigOverrides": {
+          "type": "boolean",
+          "default": false,
+          "description": "Overrides rules using Stylelint plugin settings."
         }
       }
     }
