@@ -1,0 +1,7 @@
+// Place your settings in this file to overwrite default and user settings.
+{
+  "stylelint.configOverrides": {
+    "color-hex-case": "upper"
+  },
+  "stylefmt.useStylelintConfigOverrides": true
+}
