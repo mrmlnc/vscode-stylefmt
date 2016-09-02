@@ -1,4 +1,4 @@
-# VS Code Plugin for stylefmt
+# vscode-stylefmt
 
 > [stylefmt](https://github.com/morishitter/stylefmt) is a tool that automatically formats your stylesheets.
 
@@ -6,11 +6,19 @@
 
 ## Install
 
-To install, press `F1` and select `Extensions: Install Extensions` and then search for and select `stylefmt`.
+  * Press <kbd>F1</kbd> and `select Extensions: Install Extensions`.
+  * Search for and select `stylefmt`.
+
+See the [extension installation guide](https://code.visualstudio.com/docs/editor/extension-gallery) for details.
 
 ## Usage
 
-Press `F1` and run the command named `stylefmt: Format CSS`.
+Press <kbd>F1</kbd> and run the command named `stylefmt: Format CSS`.
+
+## Supported languages
+
+  * CSS
+  * SCSS
 
 ## Supported settings
 

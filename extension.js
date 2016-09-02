@@ -1,5 +1,7 @@
 'use strict';
 
+const path = require('path');
+
 const vscode = require('vscode');
 const postcss = require('postcss');
 const stylefmt = require('stylefmt');
@@ -9,7 +11,7 @@ const scssSyntax = require('postcss-scss');
 function init(document, onDidSaveStatus) {
   const text = document.getText();
   const lang = document.languageId;
-  const cwd = vscode.workspace.rootPath ? vscode.workspace.rootPath : null;
+  const cwd = document.uri.fsPath ? path.dirname(document.uri.fsPath) : vscode.workspace.rootPath;
 
   let overrides = null;
   const useOverrides = vscode.workspace.getConfiguration('stylefmt').useStylelintConfigOverrides;
