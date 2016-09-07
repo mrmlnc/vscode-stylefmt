@@ -57,7 +57,7 @@
     "xo": "^0.16.0"
   },
   "dependencies": {
-    "postcss": "5.1.2",
+    "postcss": "5.2.0",
     "postcss-scss": "0.2.1",
     "stylefmt": "4.2.3"
   },
