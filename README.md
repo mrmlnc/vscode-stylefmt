@@ -58,7 +58,7 @@ Read about the [stylelint rules](https://github.com/morishitter/stylefmt#styleli
 ```diff
 function params (options) {
 + if (options.skip) {
-+   return Promise.resolve(options);
++   return Promise.resolve(options)
 + }
   // same as the options in stylelint
   var cosmiconfigOpts = {
