@@ -62,7 +62,8 @@
     "stylefmt": "4.3.0"
   },
   "scripts": {
-    "test": "xo"
+    "test": "xo",
+    "build": "node scripts/build"
   },
   "xo": {
     "space": true,

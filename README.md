@@ -53,6 +53,8 @@ Read about the [stylelint rules](https://github.com/morishitter/stylefmt#styleli
 
 ## Stylefmt modifications (need to check before release)
 
+Just run `npm run build` or replace manually.
+
 **lib/params.js**
 
 ```diff
