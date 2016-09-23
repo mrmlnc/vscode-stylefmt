@@ -50,7 +50,11 @@
           "description": "Overrides rules using Stylelint plugin settings."
         }
       }
-    }
+    },
+    "jsonValidation": [{
+      "fileMatch": "**/.stylelintrc*",
+      "url": "http://json.schemastore.org/stylelintrc.json"
+    }]
   },
   "devDependencies": {
     "vscode": "^0.11.17",
