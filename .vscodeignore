@@ -1,6 +1,7 @@
 .vscode/**
 typings/**
 test/**
+scripts/**
 .editorconfig
 .gitignore
 .travis.yml
