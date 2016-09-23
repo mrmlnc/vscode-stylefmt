@@ -67,7 +67,8 @@
   },
   "scripts": {
     "test": "xo",
-    "build": "node scripts/build"
+    "build": "node scripts/build",
+    "postinstall": "npm run build"
   },
   "xo": {
     "space": true,
