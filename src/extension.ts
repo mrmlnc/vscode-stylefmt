@@ -45,7 +45,7 @@ function showOutput(msg: string): void {
 /**
  * Use Stylefmt module.
  */
-function useStylefmt(document: vscode.TextDocument, range: vscode.Range, provider = false): Promise<any> {
+function useStylefmt(document: vscode.TextDocument, range: vscode.Range): Promise<IResult> {
 	const settings = vscode.workspace.getConfiguration();
 	const cwd = document.uri.fsPath ? path.dirname(document.uri.fsPath) : vscode.workspace.rootPath;
 
@@ -76,17 +76,11 @@ function useStylefmt(document: vscode.TextDocument, range: vscode.Range, provide
 
 		return postcss([stylefmt(options)])
 			.process(text, document.languageId === 'scss' && { syntax: scssSyntax })
-			.then((result) => {
-				if (!provider) {
-					return <IResult>{
-						css: result.css,
-						range
-					};
-				}
-
-				return [vscode.TextEdit.replace(range, result.css)];
-			});
-	}).catch(showOutput);
+			.then((result) => (<IResult>{
+				css: result.css,
+				range
+			}));
+	});
 }
 
 export function activate(context: vscode.ExtensionContext) {
@@ -103,23 +97,19 @@ export function activate(context: vscode.ExtensionContext) {
 				textEditor.edit((editBuilder) => {
 					editBuilder.replace(result.range, result.css);
 				});
-			});
+			})
+			.catch(showOutput);
 	});
 
-	const formatFullCode = vscode.languages.registerDocumentFormattingEditProvider(supportedDocuments, {
-		provideDocumentFormattingEdits(document: vscode.TextDocument) {
-			return useStylefmt(document, null, true);
-		}
-	});
-
-	const formatRangeCode = vscode.languages.registerDocumentRangeFormattingEditProvider(supportedDocuments, {
+	const formatCode = vscode.languages.registerDocumentRangeFormattingEditProvider(supportedDocuments, {
 		provideDocumentRangeFormattingEdits(document, range) {
-			return useStylefmt(document, range, true);
+			return useStylefmt(document, range).then((result) => {
+				return [vscode.TextEdit.replace(range, result.css)];
+			}).catch(showOutput);
 		}
 	});
 
 	// Subscriptions
 	context.subscriptions.push(command);
-	context.subscriptions.push(formatFullCode);
-	context.subscriptions.push(formatRangeCode);
+	context.subscriptions.push(formatCode);
 }
