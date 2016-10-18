@@ -2,7 +2,9 @@
 typings/**
 test/**
 scripts/**
+src/**
 .editorconfig
 .gitignore
 .travis.yml
-jsconfig.json
+tsconfig.json
+tslint.json

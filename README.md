@@ -22,13 +22,6 @@ Press <kbd>F1</kbd> and run the command named `stylefmt: Format CSS`.
 
 ## Supported settings
 
-**autoFormatOnSave**
-
-  * Type: `boolean`
-  * Default: `false`
-
-Auto format on save.
-
 **useStylelintConfigOverrides**
 
   * Type: `boolean`
