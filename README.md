@@ -13,7 +13,8 @@ See the [extension installation guide](https://code.visualstudio.com/docs/editor
 
 ## Usage
 
-Press <kbd>F1</kbd> and run the command named `stylefmt: Format CSS`.
+  * You can use global keyboard shortcut <kbd>ALT+SHIFT+F</kbd> or right-click context menu `Format code`.
+  * Or press <kbd>F1</kbd> and run the command named `stylefmt: Format CSS`.
 
 ## Supported languages
 
@@ -21,13 +22,6 @@ Press <kbd>F1</kbd> and run the command named `stylefmt: Format CSS`.
   * SCSS
 
 ## Supported settings
-
-**autoFormatOnSave**
-
-  * Type: `boolean`
-  * Default: `false`
-
-Auto format on save.
 
 **useStylelintConfigOverrides**
 
