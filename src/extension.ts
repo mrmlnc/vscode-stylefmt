@@ -23,7 +23,6 @@ interface IResult {
 	range: vscode.Range;
 }
 
-let editorConfiguration: IStylefmtOptions;
 let output: vscode.OutputChannel;
 
 /**
@@ -84,8 +83,6 @@ function useStylefmt(document: vscode.TextDocument, range: vscode.Range): Promis
 }
 
 export function activate(context: vscode.ExtensionContext) {
-	editorConfiguration = vscode.workspace.getConfiguration().get<IStylefmtOptions>('stylefmt');
-
 	const supportedDocuments: vscode.DocumentSelector = [
 		{ language: 'css', scheme: 'file' },
 		{ language: 'scss', scheme: 'file' }
