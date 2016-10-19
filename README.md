@@ -31,6 +31,8 @@ Overrides rules using Stylelint plugin settings.
 
 ## Keyboard shortcuts
 
+You can use global keyboard shortcut <kbd>ALT+SHIFT+F</kbd> or right-click context menu `Format code`.
+
 For changes keyboard shortcuts, create a new rule in `File -> Preferences -> Keyboard Shortcuts`:
 
 ```json
