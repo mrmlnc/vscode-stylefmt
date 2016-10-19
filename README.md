@@ -13,7 +13,8 @@ See the [extension installation guide](https://code.visualstudio.com/docs/editor
 
 ## Usage
 
-Press <kbd>F1</kbd> and run the command named `stylefmt: Format CSS`.
+  * You can use global keyboard shortcut <kbd>ALT+SHIFT+F</kbd> or right-click context menu `Format code`.
+  * Press <kbd>F1</kbd> and run the command named `stylefmt: Format CSS`.
 
 ## Supported languages
 
@@ -30,8 +31,6 @@ Press <kbd>F1</kbd> and run the command named `stylefmt: Format CSS`.
 Overrides rules using Stylelint plugin settings.
 
 ## Keyboard shortcuts
-
-You can use global keyboard shortcut <kbd>ALT+SHIFT+F</kbd> or right-click context menu `Format code`.
 
 For changes keyboard shortcuts, create a new rule in `File -> Preferences -> Keyboard Shortcuts`:
 
