@@ -57,7 +57,7 @@
     "tslint": "^3.15.1"
   },
   "dependencies": {
-    "postcss": "5.2.4",
+    "postcss": "5.2.5",
     "postcss-scss": "0.3.1",
     "stylefmt": "4.3.1"
   },
