@@ -22,7 +22,7 @@
     "stylefmt"
   ],
   "categories": [
-    "Other"
+    "Formatters"
   ],
   "activationEvents": [
     "onCommand:stylefmt.execute",
