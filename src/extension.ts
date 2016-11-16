@@ -1,12 +1,9 @@
 'use strict';
 
-import * as path from 'path';
-
 import * as vscode from 'vscode';
 import * as postcss from 'postcss';
 
 const stylefmt = require('stylefmt');
-const configScanner = require('stylefmt/lib/params');
 const scssSyntax = require('postcss-scss');
 
 interface IStylefmtOptions {
@@ -46,12 +43,11 @@ function showOutput(msg: string): void {
  */
 function useStylefmt(document: vscode.TextDocument, range: vscode.Range): Promise<IResult> {
 	const settings = vscode.workspace.getConfiguration();
-	const cwd = document.uri.fsPath ? path.dirname(document.uri.fsPath) : vscode.workspace.rootPath;
 
-	let overrides = null;
+	let configOverrides = null;
 	const useOverrides = settings.get<IStylefmtOptions>('stylefmt').useStylelintConfigOverrides;
 	if (useOverrides) {
-		overrides = settings.get<IStylelintOptions>('stylelint').configOverrides;
+		configOverrides = settings.get<IStylelintOptions>('stylelint').configOverrides;
 	}
 
 	let text;
@@ -66,20 +62,19 @@ function useStylefmt(document: vscode.TextDocument, range: vscode.Range): Promis
 		text = document.getText(range);
 	}
 
-	return configScanner({ cwd }).then(async (options) => {
-		options.skip = true;
+	const postcssConfig: postcss.ProcessOptions = {
+		from: document.uri.fsPath || vscode.workspace.rootPath,
+		syntax: scssSyntax
+	};
 
-		if (overrides) {
-			options.stylelint = Object.assign(options.stylelint, overrides);
-		}
-
-		return postcss([stylefmt(options)])
-			.process(text, document.languageId === 'scss' && { syntax: scssSyntax })
-			.then((result) => (<IResult>{
-				css: result.css,
-				range
-			}));
-	});
+	return postcss([stylefmt({
+			configOverrides
+		})])
+		.process(text, postcssConfig)
+		.then((result) => (<IResult>{
+			css: result.css,
+			range
+		}));
 }
 
 export function activate(context: vscode.ExtensionContext) {
