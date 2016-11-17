@@ -68,7 +68,7 @@ function useStylefmt(document: vscode.TextDocument, range: vscode.Range): Promis
 	};
 
 	return postcss([stylefmt({
-			configOverrides
+			rules: configOverrides
 		})])
 		.process(text, postcssConfig)
 		.then((result) => (<IResult>{
