@@ -57,13 +57,13 @@
     "tslint": "^3.15.1"
   },
   "dependencies": {
-    "postcss": "5.2.4",
-    "postcss-scss": "0.3.1",
-    "stylefmt": "4.3.1"
+    "postcss": "^5.2.5",
+    "postcss-scss": "^0.4.0",
+    "stylefmt": "^4.4.0"
   },
   "scripts": {
-    "ts": "tslint src/**/*.ts && tsc",
-    "build": "npm run ts && node scripts/build",
+    "lint": "tslint src/**/*.ts",
+    "build": "npm run lint && tsc",
     "postinstall": "npm run build"
   }
 }
