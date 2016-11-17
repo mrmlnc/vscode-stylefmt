@@ -2,9 +2,8 @@
 
 import * as vscode from 'vscode';
 import * as postcss from 'postcss';
-
-const stylefmt = require('stylefmt');
-const scssSyntax = require('postcss-scss');
+import * as scssSyntax from 'postcss-scss';
+import * as stylefmt from 'stylefmt';
 
 interface IStylefmtOptions {
 	formatOnSave: boolean;
