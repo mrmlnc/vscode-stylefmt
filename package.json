@@ -54,7 +54,7 @@
   "devDependencies": {
     "vscode": "^1.0.0",
     "typescript": "^2.0.3",
-    "tslint": "^3.15.1"
+    "tslint": "^4.0.1"
   },
   "dependencies": {
     "postcss": "5.2.5",
