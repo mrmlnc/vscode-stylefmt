@@ -59,7 +59,7 @@
   "dependencies": {
     "postcss": "5.2.6",
     "postcss-scss": "0.4.0",
-    "stylefmt": "5.0.1"
+    "stylefmt": "5.1.1"
   },
   "scripts": {
     "lint": "tslint src/**/*.ts",
