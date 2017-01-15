@@ -6,7 +6,7 @@
   "publisher": "mrmlnc",
   "license": "MIT",
   "engines": {
-    "vscode": "^1.6.0"
+    "vscode": "^1.7.0"
   },
   "icon": "icon.png",
   "homepage": "https://github.com/mrmlnc/vscode-stylefmt/blob/master/README.md",
@@ -52,18 +52,23 @@
     }]
   },
   "devDependencies": {
-    "vscode": "^1.0.3",
+    "@types/node": "^7.0.0",
+    "tslint": "^4.3.1",
+    "tslint-config-xo": "^1.1.0",
     "typescript": "^2.1.5",
-    "tslint": "^4.3.1"
+    "vscode": "^1.0.3"
   },
   "dependencies": {
-    "postcss": "5.2.10",
+    "postcss": "^5.2.9",
     "postcss-scss": "0.4.0",
     "stylefmt": "5.1.1"
   },
   "scripts": {
+    "postinstall": "node ./node_modules/vscode/bin/install",
+    "clean": "rimraf out",
     "lint": "tslint src/**/*.ts",
-    "build": "npm run lint && tsc",
-    "postinstall": "npm run build"
+    "compile": "tsc",
+    "build": "npm run clean && npm run lint && npm run compile",
+    "watch": "npm run clean && npm run lint && npm run compile -- --sourceMap --watch"
   }
 }

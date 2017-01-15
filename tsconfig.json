@@ -5,10 +5,10 @@
 		"moduleResolution": "node",
 		"rootDir": "src",
 		"outDir": "out",
-		"noLib": false,
-		"noImplicitAny": false,
-		"experimentalDecorators": true,
-		"removeComments": true,
-		"declaration": false
+		"forceConsistentCasingInFileNames": true,
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"pretty": true,
+		"declaration": true
 	}
 }

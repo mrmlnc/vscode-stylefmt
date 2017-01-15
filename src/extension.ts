@@ -66,9 +66,11 @@ function useStylefmt(document: vscode.TextDocument, range: vscode.Range): Promis
 		syntax: scssSyntax
 	};
 
-	return postcss([stylefmt({
+	return postcss([
+		stylefmt({
 			rules: configOverrides
-		})])
+		})
+	])
 		.process(text, postcssConfig)
 		.then((result) => (<IResult>{
 			css: result.css,
