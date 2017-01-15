@@ -7,7 +7,7 @@ declare module "stylefmt" {
 	}
 
 	interface IStylefmt {
-		(options?: IOptions): typeof postcss.default.acceptedPlugin;
+		(options?: IOptions): typeof postcss.acceptedPlugin;
 	}
 
 	const stylefmt: IStylefmt;
