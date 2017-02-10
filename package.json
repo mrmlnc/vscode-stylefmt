@@ -61,7 +61,7 @@
   "dependencies": {
     "postcss": "^5.2.9",
     "postcss-scss": "0.4.0",
-    "stylefmt": "5.1.1"
+    "stylefmt": "5.1.2"
   },
   "scripts": {
     "postinstall": "node ./node_modules/vscode/bin/install",
