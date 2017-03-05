@@ -2,7 +2,13 @@
 
 > [stylefmt](https://github.com/morishitter/stylefmt) is a tool that automatically formats your stylesheets.
 
-![VS Code Plugin for stylefmt](https://cloud.githubusercontent.com/assets/7034281/16056620/f7442b8c-327e-11e6-9400-b59085d4abef.gif)
+## Donate
+
+If you want to thank me, or promote your Issue.
+
+[![Gratipay User](https://img.shields.io/gratipay/user/mrmlnc.svg?style=flat-square)](https://gratipay.com/~mrmlnc)
+
+> Sorry, but I have work and support for plugins requires some time after work. I will be glad of your support.
 
 ## Install
 
