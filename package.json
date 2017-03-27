@@ -55,7 +55,7 @@
     "@types/node": "^7.0.8",
     "tslint": "^4.5.1",
     "tslint-config-xo": "^1.1.0",
-    "typescript": "^2.2.1",
+    "typescript": "^2.2.2",
     "vscode": "^1.1.0"
   },
   "dependencies": {
