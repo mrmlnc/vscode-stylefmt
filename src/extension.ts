@@ -5,13 +5,11 @@ import * as postcss from 'postcss';
 import * as scssSyntax from 'postcss-scss';
 import * as stylefmt from 'stylefmt';
 
-interface IStylefmtOptions {
-	formatOnSave: boolean;
-	useStylelintConfigOverrides: boolean;
-}
+import ConfigResolver from 'vscode-config-resolver';
 
-interface IStylelintOptions {
-	configOverrides: any;
+interface IStylefmtOptions {
+	configBasedir?: string;
+	config?: string | object;
 }
 
 interface IResult {
@@ -38,17 +36,9 @@ function showOutput(msg: string): void {
 }
 
 /**
- * Use Stylefmt module.
+ * Process styles using Stylefmt
  */
-function useStylefmt(document: vscode.TextDocument, range: vscode.Range): Promise<IResult> {
-	const settings = vscode.workspace.getConfiguration();
-
-	let configOverrides = null;
-	const useOverrides = settings.get<IStylefmtOptions>('stylefmt').useStylelintConfigOverrides;
-	if (useOverrides) {
-		configOverrides = settings.get<IStylelintOptions>('stylelint').configOverrides;
-	}
-
+function stylefmtProcess(document: vscode.TextDocument, range: vscode.Range, config?: IStylefmtOptions): Promise<IResult> {
 	let text;
 	if (!range) {
 		const lastLine = document.lineAt(document.lineCount - 1);
@@ -67,15 +57,38 @@ function useStylefmt(document: vscode.TextDocument, range: vscode.Range): Promis
 	};
 
 	return postcss([
-		stylefmt({
-			rules: configOverrides
-		})
+		stylefmt(config)
 	])
 		.process(text, postcssConfig)
 		.then((result) => (<IResult>{
 			css: result.css,
 			range
 		}));
+}
+
+/**
+ * Resolve Stylefmt config
+ */
+function useStylefmt(document: vscode.TextDocument, range: vscode.Range): Promise<IResult> {
+	const settings: IStylefmtOptions = vscode.workspace.getConfiguration().get('stylefmt');
+	const configResolver = new ConfigResolver(vscode.workspace.rootPath);
+	const options = {
+		packageProp: 'stylelint',
+		configFiles: [
+			'.stylelintrc',
+			'stylelint.config.js'
+		],
+		editorSettings: settings.config
+	};
+
+	return configResolver.scan(document.uri.fsPath, options).then((resolved) => {
+		return stylefmtProcess(document, range, {
+			configBasedir: settings.configBasedir || vscode.workspace.rootPath,
+			config: resolved.json
+		});
+	}).catch(() => {
+		return stylefmtProcess(document, range);
+	});
 }
 
 export function activate(context: vscode.ExtensionContext) {

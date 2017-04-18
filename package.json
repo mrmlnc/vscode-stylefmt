@@ -41,10 +41,18 @@
       "type": "object",
       "title": "stylefmt configuration",
       "properties": {
-        "stylefmt.useStylelintConfigOverrides": {
-          "type": "boolean",
-          "default": false,
-          "description": "Overrides rules using Stylelint plugin settings."
+        "stylefmt.configBasedir": {
+          "type": "string",
+          "default": "",
+          "description": "Base working directory; useful for stylelint extends parameter."
+        },
+        "stylefmt.config": {
+          "type": [
+            "string",
+            "object"
+          ],
+          "default": "",
+          "description": "Config object for stylelint or path to a stylelint config file."
         }
       }
     },
@@ -60,7 +68,8 @@
     "tslint": "^5.1.0",
     "tslint-config-xo": "^1.2.0",
     "typescript": "^2.2.2",
-    "vscode": "^1.1.0"
+    "vscode": "^1.1.0",
+    "vscode-config-resolver": "^1.0.3"
   },
   "dependencies": {
     "postcss": "5.2.17",

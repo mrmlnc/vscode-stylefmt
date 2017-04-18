@@ -29,12 +29,21 @@ See the [extension installation guide](https://code.visualstudio.com/docs/editor
 
 ## Supported settings
 
-**useStylelintConfigOverrides**
+**configBasedir**
 
-  * Type: `boolean`
-  * Default: `false`
+  * Type: `string`
+  * Default: `null`
 
-Overrides rules using Stylelint plugin settings.
+Base working directory; useful for stylelint `extends` parameter.
+
+**config**
+
+  * Type: `object || string`
+  * Default: `null`
+
+Config object for stylelint or path to a stylelint config file.
+
+*Will automatically look for `.stylelintrc` and `stylelint.config.js` in workspace root, or a `stylelint` param in the `package.json`, if config is omitted.*
 
 ## Keyboard shortcuts
 
