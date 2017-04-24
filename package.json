@@ -53,6 +53,11 @@
           ],
           "default": "",
           "description": "Config object for stylelint or path to a stylelint config file."
+        },
+        "stylefmt.useStylelintConfigOverrides": {
+          "type": "boolean",
+          "default": false,
+          "description": "Overrides rules using stylelint plugin setting 'stylelint.configOverrides'."
         }
       }
     },
@@ -67,14 +72,15 @@
     "@types/node": "^7.0.12",
     "tslint": "^5.1.0",
     "tslint-config-xo": "^1.2.0",
-    "typescript": "^2.2.2",
-    "vscode": "^1.1.0",
-    "vscode-config-resolver": "^1.0.3"
+    "typescript": "^2.2.2"
   },
   "dependencies": {
+    "extend": "3.0.0",
     "postcss": "5.2.17",
     "postcss-scss": "0.4.1",
-    "stylefmt": "5.3.2"
+    "stylefmt": "5.3.2",
+    "vscode": "1.1.0",
+    "vscode-config-resolver": "1.0.3"
   },
   "scripts": {
     "postinstall": "node ./node_modules/vscode/bin/install",
