@@ -8,6 +8,7 @@ node_modules/
 
 # Build directory
 out/
+.vscode-test
 
 # Configs
 yarn.lock

@@ -88,7 +88,8 @@
     "clean": "rimraf out",
     "lint": "tslint src/**/*.ts",
     "compile": "tsc",
-    "build": "npm run clean && npm run lint && npm run compile",
+    "test": "set CODE_TESTS_WORKSPACE=fixtures && node ./node_modules/vscode/bin/test",
+    "build": "npm run clean && npm run lint && npm run compile && npm test",
     "watch": "npm run clean && npm run lint && npm run compile -- --sourceMap --watch"
   }
 }
