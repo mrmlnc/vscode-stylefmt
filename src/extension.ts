@@ -1,17 +1,21 @@
 'use strict';
 
+import * as extend from 'extend';
 import * as vscode from 'vscode';
 import * as postcss from 'postcss';
 import * as scssSyntax from 'postcss-scss';
 import * as stylefmt from 'stylefmt';
 
+import ConfigResolver from 'vscode-config-resolver';
+
 interface IStylefmtOptions {
-	formatOnSave: boolean;
-	useStylelintConfigOverrides: boolean;
+	configBasedir?: string;
+	config?: string | object;
+	useStylelintConfigOverrides?: boolean;
 }
 
 interface IStylelintOptions {
-	configOverrides: any;
+	configOverrides?: any;
 }
 
 interface IResult {
@@ -38,17 +42,9 @@ function showOutput(msg: string): void {
 }
 
 /**
- * Use Stylefmt module.
+ * Process styles using Stylefmt
  */
-function useStylefmt(document: vscode.TextDocument, range: vscode.Range): Promise<IResult> {
-	const settings = vscode.workspace.getConfiguration();
-
-	let configOverrides = null;
-	const useOverrides = settings.get<IStylefmtOptions>('stylefmt').useStylelintConfigOverrides;
-	if (useOverrides) {
-		configOverrides = settings.get<IStylelintOptions>('stylelint').configOverrides;
-	}
-
+function stylefmtProcess(document: vscode.TextDocument, range: vscode.Range, config?: any): Promise<IResult> {
 	let text;
 	if (!range) {
 		const lastLine = document.lineAt(document.lineCount - 1);
@@ -67,15 +63,44 @@ function useStylefmt(document: vscode.TextDocument, range: vscode.Range): Promis
 	};
 
 	return postcss([
-		stylefmt({
-			rules: configOverrides
-		})
+		stylefmt(config)
 	])
 		.process(text, postcssConfig)
 		.then((result) => (<IResult>{
 			css: result.css,
 			range
 		}));
+}
+
+/**
+ * Resolve Stylefmt config
+ */
+function useStylefmt(document: vscode.TextDocument, range: vscode.Range): Promise<IResult> {
+	const settingsFmt: IStylefmtOptions = vscode.workspace.getConfiguration().get('stylefmt');
+	const settingsLint: IStylelintOptions = vscode.workspace.getConfiguration().get('stylelint');
+	const configResolver = new ConfigResolver(vscode.workspace.rootPath);
+	const resolveOptions = {
+		packageProp: 'stylelint',
+		configFiles: [
+			'.stylelintrc',
+			'stylelint.config.js'
+		],
+		editorSettings: settingsFmt.config
+	};
+
+	let configOverrides = null;
+	if (settingsFmt.useStylelintConfigOverrides) {
+		configOverrides = settingsLint.configOverrides;
+	}
+
+	return configResolver.scan(document.uri.fsPath, resolveOptions).then((resolved) => {
+		return stylefmtProcess(document, range, {
+			configBasedir: settingsFmt.configBasedir || vscode.workspace.rootPath,
+			config: extend(true, {}, resolved.json, { rules: configOverrides || {} })
+		});
+	}).catch(() => {
+		return stylefmtProcess(document, range, { rules: configOverrides });
+	});
 }
 
 export function activate(context: vscode.ExtensionContext) {
