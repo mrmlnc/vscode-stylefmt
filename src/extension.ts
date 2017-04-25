@@ -12,6 +12,7 @@ interface IStylefmtOptions {
 	configBasedir?: string;
 	config?: string | object;
 	useStylelintConfigOverrides?: boolean;
+	showErrorMessages?: boolean;
 }
 
 interface IStylelintOptions {
@@ -29,7 +30,7 @@ let output: vscode.OutputChannel;
  * Show message in output channel.
  */
 function showOutput(msg: string): void {
-	msg = msg.toString();
+	const pluginSettings: IStylefmtOptions = vscode.workspace.getConfiguration().get('stylefmt');
 
 	if (!output) {
 		output = vscode.window.createOutputChannel('Stylefmt');
@@ -37,8 +38,11 @@ function showOutput(msg: string): void {
 
 	output.clear();
 	output.appendLine('[Stylefmt]');
-	output.append(msg);
-	output.show();
+	output.append(msg.toString());
+
+	if (pluginSettings.showErrorMessages) {
+		output.show();
+	}
 }
 
 /**
@@ -109,6 +113,7 @@ export function activate(context: vscode.ExtensionContext) {
 		{ language: 'scss', scheme: 'file' }
 	];
 
+	// For plugin command: "stylefmt.execute"
 	const command = vscode.commands.registerTextEditorCommand('stylefmt.execute', (textEditor) => {
 		useStylefmt(textEditor.document, null)
 			.then((result) => {
@@ -119,6 +124,7 @@ export function activate(context: vscode.ExtensionContext) {
 			.catch(showOutput);
 	});
 
+	// For commands: "Format Document" and "Format Selection"
 	const formatCode = vscode.languages.registerDocumentRangeFormattingEditProvider(supportedDocuments, {
 		provideDocumentRangeFormattingEdits(document, range) {
 			return useStylefmt(document, range).then((result) => {

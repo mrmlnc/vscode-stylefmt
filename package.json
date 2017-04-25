@@ -47,10 +47,7 @@
           "description": "Base working directory; useful for stylelint extends parameter."
         },
         "stylefmt.config": {
-          "type": [
-            "string",
-            "object"
-          ],
+          "type": ["string", "object"],
           "default": "",
           "description": "Config object for stylelint or path to a stylelint config file."
         },
@@ -58,6 +55,11 @@
           "type": "boolean",
           "default": false,
           "description": "Overrides rules using stylelint plugin setting 'stylelint.configOverrides'."
+        },
+        "stylefmt.showErrorMessages": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show error messages or not."
         }
       }
     },
