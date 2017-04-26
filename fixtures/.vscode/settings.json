@@ -1,6 +1,0 @@
-{
-  "stylelint.configOverrides": {
-    "color-hex-case": "upper"
-  },
-  "stylefmt.useStylelintConfigOverrides": true
-}
