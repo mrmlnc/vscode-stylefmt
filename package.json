@@ -70,10 +70,10 @@
   },
   "devDependencies": {
     "@types/extend": "^2.0.30",
-    "@types/node": "^7.0.12",
+    "@types/node": "^7.0.14",
     "tslint": "^5.1.0",
     "tslint-config-xo": "^1.2.0",
-    "typescript": "^2.2.2"
+    "typescript": "^2.3.2"
   },
   "dependencies": {
     "postcss": "5.2.17",
