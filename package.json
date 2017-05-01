@@ -47,10 +47,7 @@
           "description": "Base working directory; useful for stylelint extends parameter."
         },
         "stylefmt.config": {
-          "type": [
-            "string",
-            "object"
-          ],
+          "type": ["string", "object"],
           "default": "",
           "description": "Config object for stylelint or path to a stylelint config file."
         },
