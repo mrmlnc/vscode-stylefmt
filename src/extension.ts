@@ -1,133 +1,64 @@
 'use strict';
 
-import * as extend from 'extend';
 import * as vscode from 'vscode';
-import * as postcss from 'postcss';
-import * as scssSyntax from 'postcss-scss';
-import * as stylefmt from 'stylefmt';
 
-import ConfigResolver from 'vscode-config-resolver';
+import * as stylefmt from './stylefmt';
+import * as utils from './utils';
 
-interface IStylefmtOptions {
-	configBasedir?: string;
-	config?: string | object;
-	useStylelintConfigOverrides?: boolean;
+import * as Types from './types';
+
+function getSettings(): Types.ISettings {
+	return Object.assign(
+		{},
+		vscode.workspace.getConfiguration('stylefmt'),
+		vscode.workspace.getConfiguration('stylelint'),
+		vscode.workspace.getConfiguration('editor').get('formatOnSave')
+	);
 }
 
-interface IStylelintOptions {
-	configOverrides?: any;
-}
-
-interface IResult {
-	css: string;
-	range: vscode.Range;
-}
-
-let output: vscode.OutputChannel;
-
-/**
- * Show message in output channel.
- */
-function showOutput(msg: string): void {
-	msg = msg.toString();
-
-	if (!output) {
-		output = vscode.window.createOutputChannel('Stylefmt');
-	}
-
-	output.clear();
-	output.appendLine('[Stylefmt]');
-	output.append(msg);
-	output.show();
-}
-
-/**
- * Process styles using Stylefmt
- */
-function stylefmtProcess(document: vscode.TextDocument, range: vscode.Range, config?: any): Promise<IResult> {
-	let text;
-	if (!range) {
-		const lastLine = document.lineAt(document.lineCount - 1);
-		const start = new vscode.Position(0, 0);
-		const end = new vscode.Position(document.lineCount - 1, lastLine.text.length);
-
-		range = new vscode.Range(start, end);
-		text = document.getText();
-	} else {
-		text = document.getText(range);
-	}
-
-	const postcssConfig: postcss.ProcessOptions = {
-		from: document.uri.fsPath || vscode.workspace.rootPath,
-		syntax: scssSyntax
-	};
-
-	return postcss([
-		stylefmt(config)
-	])
-		.process(text, postcssConfig)
-		.then((result) => (<IResult>{
-			css: result.css,
-			range
-		}));
-}
-
-/**
- * Resolve Stylefmt config
- */
-function useStylefmt(document: vscode.TextDocument, range: vscode.Range): Promise<IResult> {
-	const settingsFmt: IStylefmtOptions = vscode.workspace.getConfiguration().get('stylefmt');
-	const settingsLint: IStylelintOptions = vscode.workspace.getConfiguration().get('stylelint');
-	const configResolver = new ConfigResolver(vscode.workspace.rootPath);
-	const resolveOptions = {
-		packageProp: 'stylelint',
-		configFiles: [
-			'.stylelintrc',
-			'stylelint.config.js'
-		],
-		editorSettings: settingsFmt.config
-	};
-
-	let configOverrides = null;
-	if (settingsFmt.useStylelintConfigOverrides) {
-		configOverrides = settingsLint.configOverrides;
-	}
-
-	return configResolver.scan(document.uri.fsPath, resolveOptions).then((resolved) => {
-		return stylefmtProcess(document, range, {
-			configBasedir: settingsFmt.configBasedir || vscode.workspace.rootPath,
-			config: extend(true, {}, resolved.json, { rules: configOverrides || {} })
-		});
-	}).catch(() => {
-		return stylefmtProcess(document, range, { rules: configOverrides });
-	});
+function needShowErrorMessages(settings: Types.ISettings): boolean {
+	return settings.formatOnSave ? false : settings.showErrorMessages;
 }
 
 export function activate(context: vscode.ExtensionContext) {
+	const outputChannel: vscode.OutputChannel = null;
+
+	// Supported languages
 	const supportedDocuments: vscode.DocumentSelector = [
 		{ language: 'css', scheme: 'file' },
 		{ language: 'scss', scheme: 'file' }
 	];
 
+	// For plugin command: "stylefmt.execute"
 	const command = vscode.commands.registerTextEditorCommand('stylefmt.execute', (textEditor) => {
-		useStylefmt(textEditor.document, null)
+		const settings = getSettings();
+		const document = textEditor.document;
+		const needShowErrors = needShowErrorMessages(settings);
+
+		stylefmt
+			.use(settings, document, null)
 			.then((result) => {
 				textEditor.edit((editBuilder) => {
 					editBuilder.replace(result.range, result.css);
 				});
 			})
-			.catch(showOutput);
+			.catch((err) => utils.output(outputChannel, err, needShowErrors));
 	});
 
-	const formatCode = vscode.languages.registerDocumentRangeFormattingEditProvider(supportedDocuments, {
+	// For commands: "Format Document" and "Format Selection"
+	const format = vscode.languages.registerDocumentRangeFormattingEditProvider(supportedDocuments, {
 		provideDocumentRangeFormattingEdits(document, range) {
-			return useStylefmt(document, range).then((result) => {
-				return [vscode.TextEdit.replace(range, result.css)];
-			}).catch(showOutput);
+			const settings = getSettings();
+			const needShowErrors = needShowErrorMessages(settings);
+
+			return stylefmt
+				.use(settings, document, range)
+				.then((result) => [vscode.TextEdit.replace(range, result.css)])
+				.catch((err) => utils.output(outputChannel, err, needShowErrors));
 		}
 	});
 
 	// Subscriptions
 	context.subscriptions.push(command);
-	context.subscriptions.push(formatCode);
+	context.subscriptions.push(format);
 }
