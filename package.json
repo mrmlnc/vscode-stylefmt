@@ -58,6 +58,11 @@
           "type": "boolean",
           "default": false,
           "description": "Overrides rules using stylelint plugin setting 'stylelint.configOverrides'."
+        },
+        "stylefmt.showErrorMessages": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show error messages or not. Will be automatically set to false if 'editor.formatOnSave' is enabled."
         }
       }
     },

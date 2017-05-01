@@ -8,7 +8,7 @@ If you want to thank me, or promote your Issue.
 
 [![Gratipay User](https://img.shields.io/gratipay/user/mrmlnc.svg?style=flat-square)](https://gratipay.com/~mrmlnc)
 
-> Sorry, but I have work and support for plugins requires some time after work. I will be glad of your support.
+> Sorry, but I have work and support for plugins requires some time after work. I will be glad of your support and PR's.
 
 ## Install
 
@@ -44,6 +44,24 @@ Base working directory; useful for stylelint `extends` parameter.
 Config object for stylelint or path to a stylelint config file.
 
 *Will automatically look for `.stylelintrc` and `stylelint.config.js` in workspace root, or a `stylelint` param in the `package.json`, if config is omitted.*
+
+> **Warning!**
+>
+> If you want to specify a file in the current directory, the path must begin with a `./` or `../` if relative to the current directory. Also you can use HOME directory as `~` symbol.
+
+**useStylelintConfigOverrides**
+
+  * Type: `boolean`
+  * Default: `false`
+
+Overrides rules using Stylelint plugin settings.
+
+**showErrorMessages**
+
+  * Type: `boolean`
+  * Default: `true`
+
+Show error messages or not. Will be automatically set to false if `editor.formatOnSave` is enabled.
 
 ## Keyboard shortcuts
 
