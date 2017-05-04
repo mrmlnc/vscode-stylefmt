@@ -1,5 +1,7 @@
 # vscode-stylefmt
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/mrmlnc/vscode-stylefmt.svg)](https://greenkeeper.io/)
+
 > [stylefmt](https://github.com/morishitter/stylefmt) is a tool that automatically formats your stylesheets.
 
 ## Donate
