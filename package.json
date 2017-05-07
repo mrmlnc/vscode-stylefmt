@@ -84,7 +84,7 @@
   "dependencies": {
     "extend": "^3.0.1",
     "postcss": "5.2.17",
-    "postcss-scss": "0.4.1",
+    "postcss-scss": "1.0.0",
     "stylefmt": "5.3.2",
     "vscode": "1.1.0"
   },
