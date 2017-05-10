@@ -26,6 +26,7 @@ export function activate(context: vscode.ExtensionContext) {
 	// Supported languages
 	const supportedDocuments: vscode.DocumentSelector = [
 		{ language: 'css', scheme: 'file' },
+		{ language: 'postcss', scheme: 'file' },
 		{ language: 'scss', scheme: 'file' }
 	];
 
