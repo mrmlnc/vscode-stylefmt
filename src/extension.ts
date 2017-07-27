@@ -8,7 +8,7 @@ import * as utils from './utils';
 import * as Types from './types';
 
 function getSettings(): Types.ISettings {
-	return Object.assign(
+	return <Types.ISettings>Object.assign(
 		{},
 		vscode.workspace.getConfiguration('stylefmt'),
 		vscode.workspace.getConfiguration('stylelint'),
@@ -55,7 +55,7 @@ export function activate(context: vscode.ExtensionContext) {
 
 			return stylefmt
 				.use(settings, document, range)
-				.then((result) => [vscode.TextEdit.replace(range, result.css)])
+				.then((result) => <any>[vscode.TextEdit.replace(range, result.css)])
 				.catch((err) => utils.output(outputChannel, err, needShowErrors));
 		}
 	});

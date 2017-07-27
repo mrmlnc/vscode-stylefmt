@@ -17,10 +17,10 @@ export function fileExist(filepath: string): Promise<boolean> {
 	});
 }
 
-export function removeFile(filepath: string) {
+export function removeFile(filepath: string): Promise<any> {
 	return fileExist(filepath).then((exists) => {
 		if (!exists) {
-			return;
+			return false;
 		}
 
 		return new Promise((resolve, reject) => {
@@ -39,7 +39,7 @@ function mockupDocument(): vscode.TextDocument {
 	return <any>{
 		uri: { fsPath: '.tmp/test.scss' },
 		lineCount: text.split('\n').length,
-		lineAt: (line) => ({
+		lineAt: (line: number) => ({
 			lineNumber: line,
 			text: text.split('\n')[line]
 		}),
@@ -48,7 +48,7 @@ function mockupDocument(): vscode.TextDocument {
 }
 
 class Position {
-	constructor(public line, public character) { }
+	constructor(public line: number, public character: number) { }
 }
 
 class Range {
