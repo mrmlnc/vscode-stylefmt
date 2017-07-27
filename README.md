@@ -6,7 +6,7 @@
 
 If you want to thank me, or promote your Issue.
 
-[![Gratipay User](https://img.shields.io/gratipay/user/mrmlnc.svg?style=flat-square)](https://gratipay.com/~mrmlnc)
+[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://paypal.me/mrmlnc)
 
 > Sorry, but I have work and support for plugins requires some time after work. I will be glad of your support and PR's.
 
@@ -25,6 +25,8 @@ See the [extension installation guide](https://code.visualstudio.com/docs/editor
 ## Supported languages
 
   * CSS
+  * PostCSS
+  * Less
   * SCSS
 
 ## Supported settings
