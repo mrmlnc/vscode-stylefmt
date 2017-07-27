@@ -28,6 +28,7 @@
     "onCommand:stylefmt.execute",
     "onLanguage:css",
     "onLanguage:postcss",
+    "onLanguage:less",
     "onLanguage:scss"
   ],
   "main": "./out/extension",
