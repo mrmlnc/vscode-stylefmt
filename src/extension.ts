@@ -7,12 +7,14 @@ import * as utils from './utils';
 
 import * as Types from './types';
 
-function getSettings(): Types.ISettings {
+function getSettings(document: vscode.TextDocument): Types.ISettings {
+	const workspaceFolder = vscode.workspace.getWorkspaceFolder(document.uri);
+
 	return <Types.ISettings>Object.assign(
 		{},
-		vscode.workspace.getConfiguration('stylefmt'),
-		vscode.workspace.getConfiguration('stylelint'),
-		vscode.workspace.getConfiguration('editor').get('formatOnSave')
+		vscode.workspace.getConfiguration('stylefmt', workspaceFolder.uri),
+		vscode.workspace.getConfiguration('stylelint', workspaceFolder.uri),
+		vscode.workspace.getConfiguration('editor', workspaceFolder.uri).get('formatOnSave')
 	);
 }
 
@@ -33,8 +35,8 @@ export function activate(context: vscode.ExtensionContext) {
 
 	// For plugin command: "stylefmt.execute"
 	const command = vscode.commands.registerTextEditorCommand('stylefmt.execute', (textEditor) => {
-		const settings = getSettings();
 		const document = textEditor.document;
+		const settings = getSettings(document);
 		const needShowErrors = needShowErrorMessages(settings);
 
 		stylefmt
@@ -50,7 +52,7 @@ export function activate(context: vscode.ExtensionContext) {
 	// For commands: "Format Document" and "Format Selection"
 	const format = vscode.languages.registerDocumentRangeFormattingEditProvider(supportedDocuments, {
 		provideDocumentRangeFormattingEdits(document, range) {
-			const settings = getSettings();
+			const settings = getSettings(document);
 			const needShowErrors = needShowErrorMessages(settings);
 
 			return stylefmt

@@ -59,7 +59,9 @@ const stylefmt = proxyquire('./index', {
 	vscode: {
 		Position,
 		Range,
-		workspace: { rootPath: '.tmp' },
+		workspace: {
+			getWorkspaceFolder: () => ({ uri: { fsPath: '.tmp' } })
+		},
 		'@noCallThru': true
 	}
 });
