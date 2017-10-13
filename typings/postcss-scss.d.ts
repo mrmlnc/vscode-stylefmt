@@ -1,14 +1,8 @@
 declare module 'postcss-scss' {
 
-	interface IOptions {
-		syntax?: string[];
-	}
+	import postcss = require('postcss');
 
-	interface IPostcssScss {
-		(options?: IOptions): NodeJS.ReadWriteStream;
-	}
+	const postcssScss: postcss.ProcessOptions;
 
-	const postcssScss: IPostcssScss;
 	export = postcssScss;
-
 }
