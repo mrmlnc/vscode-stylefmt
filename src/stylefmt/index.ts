@@ -11,7 +11,7 @@ import * as settingsManager from './settings-manager';
 import * as Types from '../types';
 
 export function use(settings: Types.ISettings, document: vscode.TextDocument, range: vscode.Range): Promise<Types.IResult> {
-	const rootDirectory = vscode.workspace.rootPath || '';
+	const rootDirectory = vscode.workspace.getWorkspaceFolder(document.uri).uri.fsPath;
 	const stylefmtConfig = settingsManager.prepare(rootDirectory, settings);
 
 	let text;
@@ -27,7 +27,7 @@ export function use(settings: Types.ISettings, document: vscode.TextDocument, ra
 	}
 
 	const postcssConfig: postcss.ProcessOptions = {
-		from: document.uri.fsPath || vscode.workspace.rootPath || '',
+		from: document.uri.fsPath || rootDirectory || '',
 		syntax: scssSyntax
 	};
 
