@@ -2,7 +2,7 @@
   "name": "vscode-stylefmt",
   "displayName": "stylefmt",
   "description": "Modern CSS Formatter",
-  "version": "2.5.0",
+  "version": "2.6.0",
   "publisher": "mrmlnc",
   "license": "MIT",
   "engines": {
@@ -29,7 +29,8 @@
     "onLanguage:css",
     "onLanguage:postcss",
     "onLanguage:less",
-    "onLanguage:scss"
+    "onLanguage:scss",
+    "onLanguage:sugarss"
   ],
   "main": "./out/extension",
   "contributes": {
@@ -49,7 +50,10 @@
           "description": "Base working directory; useful for stylelint extends parameter."
         },
         "stylefmt.config": {
-          "type": ["string", "object"],
+          "type": [
+            "string",
+            "object"
+          ],
           "default": "",
           "description": "Config object for stylelint or path to a stylelint config file."
         },
@@ -62,6 +66,11 @@
           "type": "boolean",
           "default": true,
           "description": "Show error messages or not. Will be automatically set to false if 'editor.formatOnSave' is enabled."
+        },
+        "stylefmt.sugarss": {
+          "type": "boolean",
+          "default": false,
+          "description": "Trigger SugarSS syntax support"
         }
       }
     },
@@ -88,6 +97,7 @@
     "extend": "3.0.1",
     "postcss": "6.0.8",
     "postcss-scss": "1.0.2",
+    "sugarss": "2.0.0",
     "stylefmt": "6.0.0",
     "vscode": "1.1.5"
   },
