@@ -27,7 +27,7 @@ export function use(settings: Types.ISettings, document: vscode.TextDocument, ra
 		text = document.getText(range);
 	}
 
-	const isSugarss = document.languageId === 'sugarss'
+	const isSugarss = document.languageId === 'sugarss';
 
 	const postcssConfig: postcss.ProcessOptions = {
 		from: document.uri.fsPath || rootDirectory || '',
