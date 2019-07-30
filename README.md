@@ -65,13 +65,6 @@ Overrides rules using Stylelint plugin settings.
 
 Show error messages or not. Will be automatically set to false if `editor.formatOnSave` is enabled.
 
-**sugarss**
-
--   Type: `boolean`
--   Default: `false`
-
-Trigger `SugarSS` syntax support.
-
 ## Keyboard shortcuts
 
 For changes keyboard shortcuts, create a new rule in `File -> Preferences -> Keyboard Shortcuts`:

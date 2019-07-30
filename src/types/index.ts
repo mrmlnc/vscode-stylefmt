@@ -13,7 +13,6 @@ export interface IStylefmtSettings {
 	config?: string | object;
 	useStylelintConfigOverrides?: boolean;
 	showErrorMessages?: boolean;
-	sugarss?: boolean;
 }
 
 export interface IStylelintSettings {

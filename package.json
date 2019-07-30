@@ -66,11 +66,6 @@
           "type": "boolean",
           "default": true,
           "description": "Show error messages or not. Will be automatically set to false if 'editor.formatOnSave' is enabled."
-        },
-        "stylefmt.sugarss": {
-          "type": "boolean",
-          "default": false,
-          "description": "Trigger SugarSS syntax support"
         }
       }
     },
