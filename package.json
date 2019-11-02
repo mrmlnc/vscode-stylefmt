@@ -85,7 +85,7 @@
     "typescript": "^2.4.2"
   },
   "dependencies": {
-    "extend": "3.0.1",
+    "extend": "3.0.2",
     "postcss": "6.0.8",
     "postcss-scss": "1.0.2",
     "stylefmt": "6.0.0",
