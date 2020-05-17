@@ -49,7 +49,10 @@
           "description": "Base working directory; useful for stylelint extends parameter."
         },
         "stylefmt.config": {
-          "type": ["string", "object"],
+          "type": [
+            "string",
+            "object"
+          ],
           "default": "",
           "description": "Config object for stylelint or path to a stylelint config file."
         },
@@ -88,7 +91,7 @@
     "extend": "3.0.1",
     "postcss": "6.0.8",
     "postcss-scss": "1.0.2",
-    "stylefmt": "6.0.0",
+    "stylefmt": "6.0.3",
     "vscode": "1.1.5"
   },
   "scripts": {
