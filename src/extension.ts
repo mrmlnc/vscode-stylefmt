@@ -30,7 +30,8 @@ export function activate(context: vscode.ExtensionContext) {
 		{ language: 'css', scheme: 'file' },
 		{ language: 'postcss', scheme: 'file' },
 		{ language: 'less', scheme: 'file' },
-		{ language: 'scss', scheme: 'file' }
+		{ language: 'scss', scheme: 'file' },
+		{ language: 'sugarss', scheme: 'file' }
 	];
 
 	// For plugin command: "stylefmt.execute"

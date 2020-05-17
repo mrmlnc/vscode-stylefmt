@@ -28,6 +28,7 @@ See the [extension installation guide](https://code.visualstudio.com/docs/editor
   * PostCSS
   * Less
   * SCSS
+  * SugarSS
 
 ## Supported settings
 

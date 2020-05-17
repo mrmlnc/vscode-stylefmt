@@ -29,7 +29,8 @@
     "onLanguage:css",
     "onLanguage:postcss",
     "onLanguage:less",
-    "onLanguage:scss"
+    "onLanguage:scss",
+    "onLanguage:sugarss"
   ],
   "main": "./out/extension",
   "contributes": {
@@ -93,7 +94,8 @@
     "extend": "3.0.1",
     "postcss": "6.0.8",
     "postcss-scss": "1.0.2",
-    "stylefmt": "6.0.3"
+    "stylefmt": "6.0.3",
+    "sugarss": "2.0.0"
   },
   "scripts": {
     "clean": "rimraf out",

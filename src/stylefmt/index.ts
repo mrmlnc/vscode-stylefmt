@@ -4,6 +4,7 @@ import * as vscode from 'vscode';
 
 import * as postcss from 'postcss';
 import * as scssSyntax from 'postcss-scss';
+import * as sugarss from 'sugarss';
 import * as stylefmt from 'stylefmt';
 
 import * as settingsManager from './settings-manager';
@@ -26,9 +27,11 @@ export function use(settings: Types.ISettings, document: vscode.TextDocument, ra
 		text = document.getText(range);
 	}
 
+	const isSugarss = document.languageId === 'sugarss';
+
 	const postcssConfig: postcss.ProcessOptions = {
 		from: document.uri.fsPath || rootDirectory || '',
-		syntax: scssSyntax
+		syntax: isSugarss ? sugarss : scssSyntax
 	};
 
 	const postcssPlugins: postcss.AcceptedPlugin[] = [
