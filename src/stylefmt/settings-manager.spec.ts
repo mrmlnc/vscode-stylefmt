@@ -24,7 +24,7 @@ describe('Settings Manager', () => {
 	it('should return config with `config` option as string', () => {
 		const actual = settingsManager.prepare('rootPath', { config: './something' });
 
-		assert.ok(actual.configFile.endsWith('rootPath/something'));
+		assert.ok(actual.configFile.endsWith('something'));
 	});
 
 	it('should return config with `config` option as object', () => {
