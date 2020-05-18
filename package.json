@@ -91,10 +91,10 @@
     "typescript": "2.4.2"
   },
   "dependencies": {
-    "extend": "3.0.1",
-    "postcss": "6.0.8",
-    "postcss-scss": "1.0.2",
-    "stylefmt": "6.0.3",
+    "extend": "3.0.2",
+    "postcss": "7.0.30",
+    "postcss-scss": "2.1.1",
+    "stylefmt": "git+https://git@github.com/ronilaukkarinen/stylefmt.git",
     "sugarss": "2.0.0"
   },
   "scripts": {
@@ -104,5 +104,10 @@
     "test": "mocha out/**/*.spec.js -s 0",
     "build": "npm run clean && npm run lint && npm run compile && npm t",
     "watch": "npm run clean && npm run lint && npm run compile -- --sourceMap --watch"
+  },
+  "__metadata": {
+    "id": "b9b38184-b873-4eae-b226-f332c40afd1a",
+    "publisherId": "c958976e-9702-4f1a-8bdf-26b7bc012d65",
+    "publisherDisplayName": "mrmlnc"
   }
 }
