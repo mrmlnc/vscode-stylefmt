@@ -17,7 +17,7 @@ Alternatively you can use:
 
 Do you like this project? Support it by donating, creating an issue or pull request.
 
-[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)][paypal_mrmlnc]
+[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://paypal.me/mrmlnc)
 
 ## Install
 
