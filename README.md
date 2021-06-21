@@ -4,14 +4,13 @@
 
 ## :warning: This plugin is archived
 
-The main package ([`stylefmt`](https://github.com/morishitter/stylefmt)) does not develop. In this regard, the development of the plugin does not make sense.
+The main package ([`stylefmt`](https://github.com/morishitter/stylefmt)) does not develop.
 
 Alternatively you can use:
 
+* [vscode-stylefmt](https://github.com/ronilaukkarinen/vscode-stylefmt) plugin with `stylefmt` [fork](https://github.com/ronilaukkarinen/stylefmt).
 * [`postcss`](https://github.com/postcss/postcss) with similar plugins.
 * [`stylelint`](https://github.com/stylelint/stylelint)
-
-> I'm ready to go back to developing the plugin if the stylefmt will develops again.
 
 ## Donation
 
